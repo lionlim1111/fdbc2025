@@ -1,7 +1,9 @@
 const card = document.getElementById('card');
 const quiz = document.getElementById('quiz');
+const surprise = document.getElementById('surprise');
 const canvas = document.getElementById('confetti-canvas');
 const ctx = canvas.getContext('2d');
+const birthdaySong = document.getElementById('birthday-song');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -68,12 +70,19 @@ function startConfetti() {
     drawConfetti();
 }
 
-// Quiz logic
+// Quiz logic with surprise page
 function checkAnswer(answer) {
     if (answer === 'mitochondria') {
         alert('Correct! 🎉 Mitochondria is the powerhouse of the cell!');
         quiz.style.display = 'none';
+        card.style.display = 'none';
         startConfetti();
+        setTimeout(() => {
+            surprise.style.display = 'flex';
+            birthdaySong.play().catch(() => {
+                console.log('Audio playback was blocked. User interaction may be required.');
+            });
+        }, 500);
     } else {
         alert('Oops! Try again.');
     }
